@@ -41,8 +41,8 @@
       name: comparexturkey
       image: hakkiogretmen/comparex-turkey:latest
    - name: Add Kubectl repo
-    get_url:
-      url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
-      dest: /usr/local/bin/kubectl
-    become: true
+      get_url:
+        url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
+        dest: /usr/local/bin/kubectl
+      become: true
       
