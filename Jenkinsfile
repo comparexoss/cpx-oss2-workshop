@@ -27,10 +27,10 @@ pipeline {
       stage('Plan AKS using terraform') {
           steps {   
             script {
-                    currentBuild.displayName = "${version}"
+                    currentBuild.displayName = "${BUILD_TAG}"
                 }
               sh 'terraform init -input=false'
-              sh "terraform plan -input=false -out tfplan -var 'version=${version}'"
+              sh "terraform plan -input=false -out tfplan -var 'version=${BUILD_TAG}'"
               sh 'terraform show -no-color tfplan > tfplan.txt'
         }
       }
