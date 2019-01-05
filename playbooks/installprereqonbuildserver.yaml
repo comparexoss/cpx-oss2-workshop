@@ -77,4 +77,4 @@
   - name: Install Helm
     shell: |
       curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
-    
+    become: true
