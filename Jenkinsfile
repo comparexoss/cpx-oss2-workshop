@@ -16,7 +16,7 @@ pipeline {
       stage('Prepare Build Server') {
           steps {   
           ansiblePlaybook( 
-                playbook : 'playbooks/installprereq.yaml',
+                playbook : 'playbooks/installprereqonbuildserver.yaml',
                 become: true)
         }
       }
