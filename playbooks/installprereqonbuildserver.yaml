@@ -42,7 +42,7 @@
     command: docker run hakkiogretmen/comparex-turkey
     become: true
   - name: Add Kubectl repo
-    command: |
+    shell: >
       cat <<EOF > /etc/yum.repos.d/kubernetes.repo
       [kubernetes]
       name=Kubernetes
