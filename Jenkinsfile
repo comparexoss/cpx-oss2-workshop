@@ -36,10 +36,10 @@ pipeline {
              dir('terraform')
              {
               script {
-                    currentBuild.displayName = "${env.BUILD_TAG}"
+                    currentBuild.displayName = "${env.BUILD_NUMBER}"
                 }
               sh 'terraform init -input=false'
-              sh "terraform plan -input=false -out tfplan -var 'version=${env.BUILD_TAG}'"
+              sh "terraform plan -input=false -out tfplan -var 'version=${env.BUILD_NUMBER}'"
               sh 'terraform show -no-color tfplan > tfplan.txt'
              }
         }
