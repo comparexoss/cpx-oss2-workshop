@@ -42,7 +42,7 @@
     command: docker run hakkiogretmen/comparex-turkey
     become: true
   - name: Add Kubectl repo
-    shell: >
+    shell: |
       cat <<EOF > /etc/yum.repos.d/kubernetes.repo
       [kubernetes]
       name=Kubernetes
@@ -52,6 +52,7 @@
       repo_gpgcheck=1
       gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
       EOF
+    become: true
   - name: Install Kubectl
     command: yum install -y kubectl
     become: true
