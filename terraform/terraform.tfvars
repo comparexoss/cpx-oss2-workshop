@@ -2,6 +2,8 @@ terraform_azure_resource_group = "mstrdevopsaksrg"
 
 terraform_azure_region = "West Europe"
 
+terrafform_aks_name = "devopshkkaks"
+
 terraform_aks_agent_vm_count = 2
 
 terraform_aks_vm_size = "Standard_D2_v2"
