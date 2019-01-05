@@ -18,6 +18,13 @@ pipeline {
             git url: "${env.GIT_REPO}", branch: 'master'
         }
       }
+      stage('Prepare Build Server') {
+             ansiblePlaybook( 
+                playbook : 'playbooks/installprereq.yaml',
+                become: true)
+        }
+      
+      }
     stage('Build images') {
             steps{
                 dir('app/api')
