@@ -1,0 +1,38 @@
+- name: run the playbook on the localhost
+  hosts: buildservers
+  become: true
+  tasks:
+  - name: Install yum utils
+    yum:
+      name: yum-utils
+      state: latest
+  - name: Install device-mapper-persistent-data
+    yum:
+      name: device-mapper-persistent-data
+      state: latest
+  - name: Install lvm2
+    yum:
+      name: lvm2
+      state: latest
+  - name: Add Docker repo
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docer-ce.repo
+    become: true
+  - name: Install Docker
+    package: 
+      name: docker-ce
+      state: lastest
+    become: true
+  - name: Start Docker Service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+    become: true
+  - name: Add jenkins user to docker group
+    user:
+      name: jenkins
+      groups: docker
+      append: yes
+    become: true
