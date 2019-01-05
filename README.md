@@ -1,4 +1,5 @@
-# Microsoft Acik Kaynak Zirvesi - Istanbul 2018
+# MSHOWTO DevOps Day 2 - Istanbul 2019
+# Yildiz Teknik Üniversitesi Davutpasa Kampusu - Teknokent
 
 _Delivering modern cloud native applications with ​open source technologies on Azure​_
 
