@@ -16,4 +16,4 @@ terraform_azure_service_principal_client_id = "07e3e541-57d3-4591-b7eb-705da6838
 
 terraform_azure_service_principal_client_secret = "5d1c2325-5493-425f-aee5-e37fb2ffffa6"
 
-terraform_aks_kubernetes_version = "1.8.6"
+terraform_aks_kubernetes_version = "1.11.5"
