@@ -42,7 +42,8 @@
     command: docker run hakkiogretmen/comparex-turkey
     become: true
   - name: Add Kubectl repo
-    command: cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+    command: |
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
