@@ -96,21 +96,21 @@ pipeline {
       stage('Test api image') {
          agent { docker "${env.API_IMAGE}:${env.BUILD_NUMBER}" } 
                steps {
-                        echo "$HOSTNAME"
+                        sh 'echo $HOSTNAME'
                      }
         }
       
        stage('Test web image') {
          agent { docker "${env.WEB_IMAGE}:${env.BUILD_NUMBER}" } 
                steps {
-                        echo "$HOSTNAME"
+                        sh 'echo $HOSTNAME'
                      }
       }
       
         stage('Test mongo image') {
          agent { docker "${env.DB_IMAGE}:${env.BUILD_NUMBER}" } 
                steps {
-                        echo "$HOSTNAME"
+                        sh 'echo $HOSTNAME'
                      }
       }
     stage('Push images to ACR') {
@@ -133,7 +133,10 @@ pipeline {
     }
     stage('Helm Install'){
           steps{
-            sh 'sudo /usr/local/bin/helm init --client-only' 
+            sh 'sudo /usr/local/bin/kubectl create serviceaccount --namespace kube-system tiller' 
+            sh 'sudo /usr/local/bin/kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller'
+            sh 'sudo /usr/local/bin/kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'  '
+            sh 'sudo /usr/local/bin/helm init --service-account tiller'
           }
     }
     stage('Helm PreSteps'){
