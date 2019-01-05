@@ -1,4 +1,4 @@
-terraform_azure_resource_group = ""
+terraform_azure_resource_group = "mstrdevopsaksrg"
 
 terraform_azure_region = "West Europe"
 
