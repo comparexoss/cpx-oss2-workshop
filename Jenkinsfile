@@ -7,6 +7,7 @@ pipeline {
         WEB_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web"
         API_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api"
         DB_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db"
+        PATH="/usr/local/bin"
         
     }
   options { 
