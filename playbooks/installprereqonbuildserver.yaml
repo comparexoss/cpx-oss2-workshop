@@ -71,6 +71,6 @@
       - wget
   - name: Install terraform
     unarchive:
-      src: https://releases.hashicorp.com/terraform/0.9.1/terraform_0.9.1_linux_amd64.zip
+      src: https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
       dest: /usr/bin
       remote_src: True
