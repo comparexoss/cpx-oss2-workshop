@@ -6,7 +6,7 @@ terrafform_aks_name = "devopshkkaks"
 
 terraform_aks_agent_vm_count = 2
 
-terraform_aks_vm_size = "Standard_D2_v2"
+terraform_aks_vm_size = "Standard_DS1_v2"
 
 terraform_azure_admin_name = "azureuser"
 
