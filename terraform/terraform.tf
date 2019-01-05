@@ -31,6 +31,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     client_id     = "${var.terraform_azure_service_principal_client_id}"
     client_secret = "${var.terraform_azure_service_principal_client_secret}"
   }
+  role_based_access_control {
+      enabled = false
+  }
+  oms_agent{
+      enabled = false
+  }
   
    tags {
         Environment = "Development"
