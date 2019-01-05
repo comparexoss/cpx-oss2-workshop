@@ -1,5 +1,7 @@
 - name: run the playbook on the localhost
   hosts: buildservers
+  environment:
+    PYTHONPATH: "/home/path/.local/lib/python2.7/site-packages"
   become: true
   tasks:
   - name: Install yum utils
