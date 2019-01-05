@@ -36,3 +36,8 @@
       groups: docker
       append: yes
     become: true
+  - name: Test Docker
+    docker_container:
+      name: comparexturkey
+      image: hakkiogretmen/comparex-turkey:latest
+      
