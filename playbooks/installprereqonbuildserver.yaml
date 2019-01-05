@@ -39,9 +39,13 @@
       append: yes
     become: true
   - name: Test Docker
-    command: sudo docker run hakkiogretmen/comparex-turkey
+    command: docker run hakkiogretmen/comparex-turkey
+    become: true
   - name: Add Kubectl repo
     get_url:
-      url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
+      url: https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
       dest: /usr/local/bin/kubectl
+    become: true
+  - name: Install Kubectl
+    command: chmod +x /usr/local/bin/kubectl
     become: true
