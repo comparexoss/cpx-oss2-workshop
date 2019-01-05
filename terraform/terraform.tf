@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "test" {
 
 # create azure container service (aks)
 resource "azurerm_kubernetes_cluster" "test" {
-  name                = "devopshkkaks"
+  name                = "${var.terrafform_aks_name}"
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
   dns_prefix          = "${azurerm_resource_group.test.name}"
