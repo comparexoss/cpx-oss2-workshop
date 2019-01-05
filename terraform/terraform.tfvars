@@ -10,7 +10,7 @@ terraform_aks_vm_size = "Standard_DS1_v2"
 
 terraform_azure_admin_name = "azureuser"
 
-terraform_azure_ssh_key = "/root/.ssh/id_rsa.pub"
+terraform_azure_ssh_key = "/var/tmp/.ssh/id_rsa.pub"
 
 terraform_azure_service_principal_client_id = ""
 
