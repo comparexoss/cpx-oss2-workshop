@@ -33,12 +33,15 @@ pipeline {
       }
       stage('Plan AKS using terraform') {
           steps {   
-            script {
+             dir('terraform')
+             {
+              script {
                     currentBuild.displayName = "${env.BUILD_TAG}"
                 }
               sh 'terraform init -input=false'
               sh "terraform plan -input=false -out tfplan -var 'version=${env.BUILD_TAG}'"
               sh 'terraform show -no-color tfplan > tfplan.txt'
+             }
         }
       }
       
@@ -50,24 +53,30 @@ pipeline {
             }
 
             steps {
+                dir('terraform')
+                {
                 script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
                         parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                }
                 }
             }
         }
       
        stage('Apply') {
             steps {
+                dir('terraform')
+                {
                 sh "terraform apply -input=false tfplan"
+                }
             }
         }
   }
     
     post {
         always {
-            archiveArtifacts artifacts: 'tfplan.txt'
+            archiveArtifacts artifacts: 'terraform/tfplan.txt'
         }
     }
 }
