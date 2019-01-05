@@ -39,10 +39,7 @@
       append: yes
     become: true
   - name: Test Docker
-    docker_container:
-      name: comparexturkey
-      image: hakkiogretmen/comparex-turkey:latest
-    become: true
+    command: sudo docker run hakkiogretmen/comparex-turkey
   - name: Add Kubectl repo
     get_url:
       url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
