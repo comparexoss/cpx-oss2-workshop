@@ -30,4 +30,9 @@ resource "azurerm_kubernetes_cluster" "test" {
     client_id     = "${var.terraform_azure_service_principal_client_id}"
     client_secret = "${var.terraform_azure_service_principal_client_secret}"
   }
+  
+   tags {
+        Environment = "Development"
+    }
+  
 }
