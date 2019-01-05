@@ -131,6 +131,11 @@ pipeline {
             }
         }
     }
+    stage('Helm Install'){
+          steps{
+            sh 'sudo /usr/local/bin/helm init --client-only' 
+          }
+    }
     stage('Helm PreSteps'){
           steps{
             sh 'sudo /usr/local/bin/helm init --client-only' 
