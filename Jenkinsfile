@@ -2,7 +2,7 @@ pipeline {
     environment {
         ACR_REPO    = 'mstrdevopsworkshop'
         ACR_CRED = credentials('acr-credentials')
-        GIT_REPO = "https://github.com/comparexoss/cpx-oss-workshop.git"
+        GIT_REPO = "https://github.com/comparexoss/cpx-oss2-workshop.git"
         WEB_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web"
         API_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api"
         DB_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db"
