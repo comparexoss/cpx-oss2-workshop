@@ -1,7 +1,7 @@
 variable "terraform_azure_resource_group" {
   type        = "string"
   description = "Azure resource group"
-  default     = "mstrdevopsaks-rg"
+  default     = "mstrdevopsaksrg"
 }
 
 variable "terraform_azure_region" {
