@@ -19,7 +19,7 @@ pipeline {
                 become: true)
         }
       
-      }
+      
     
   }
 }
