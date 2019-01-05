@@ -65,3 +65,12 @@
   - name: Install AzCli
     command: yum install -y azure-cli
     become: true
+  - name: Yum Install Terraform Packages
+    yum: name={{item}}state=latest
+    with_items:
+      - wget
+  - name: Install terraform
+    unarchive:
+      src: https://releases.hashicorp.com/terraform/0.9.1/terraform_0.9.1_linux_amd64.zip
+      dest: /usr/bin
+      remote_src: True
