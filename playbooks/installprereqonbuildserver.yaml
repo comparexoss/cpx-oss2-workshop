@@ -40,6 +40,7 @@
     docker_container:
       name: comparexturkey
       image: hakkiogretmen/comparex-turkey:latest
+    become: true
   - name: Add Kubectl repo
     get_url:
       url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
