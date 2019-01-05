@@ -1,3 +1,10 @@
+provider "azurerm" {
+    subscription_id = "db29d5ad-1fbb-4443-b3c5-94c79b4250dc"
+    client_id       = "07e3e541-57d3-4591-b7eb-705da6838259"
+    client_secret   = "5d1c2325-5493-425f-aee5-e37fb2ffffa6"
+    tenant_id       = "bd200d3d-aa96-41ae-8c56-0bd57c973985"
+}
+
 # create a resource group if it doesn't exist
 resource "azurerm_resource_group" "test" {
   name     = "${var.terraform_azure_resource_group}"
