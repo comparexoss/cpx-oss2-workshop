@@ -1,3 +1,8 @@
+variable "terrafform_aks_name" {
+  type = "string"
+  description = "AKS Cluster Name"
+  default = ""
+}
 variable "terraform_azure_resource_group" {
   type        = "string"
   description = "Azure resource group"
