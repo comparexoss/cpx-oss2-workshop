@@ -5,7 +5,11 @@ pipeline {
   options { 
       disableConcurrentBuilds() 
       timestamps()
+      
   }
+   parameters {
+        booleanParam(defaultValue: true, description: 'set true for automatic approve', name: 'autoApprove')
+    }
   agent any
   stages {
       stage('Checkout') {
@@ -20,5 +24,43 @@ pipeline {
                 become: true)
         }
       }
+      stage('Plan AKS using terraform') {
+          steps {   
+            script {
+                    currentBuild.displayName = "${version}"
+                }
+              sh 'terraform init -input=false'
+              sh "terraform plan -input=false -out tfplan -var 'version=${version}'"
+              sh 'terraform show -no-color tfplan > tfplan.txt'
+        }
+      }
+      
+       stage('Approval') {
+            when {
+                not {
+                    equals expected: true, actual: params.autoApprove
+                }
+            }
+
+            steps {
+                script {
+                    def plan = readFile 'tfplan.txt'
+                    input message: "Do you want to apply the plan?",
+                        parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                }
+            }
+        }
+      
+       stage('Apply') {
+            steps {
+                sh "terraform apply -input=false tfplan"
+            }
+        }
   }
+    
+    post {
+        always {
+            archiveArtifacts artifacts: 'tfplan.txt'
+        }
+    }
 }
