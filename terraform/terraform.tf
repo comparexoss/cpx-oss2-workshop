@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     admin_username = "${var.terraform_azure_admin_name}"
 
     ssh_key {
-      key_data = "${var.terraform_azure_ssh_key}"
+      key_data = "${file("${var.terraform_azure_ssh_key}")}"
     }
   }
 
