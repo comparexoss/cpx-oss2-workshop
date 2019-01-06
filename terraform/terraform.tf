@@ -37,24 +37,25 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
 }
 
-    resource "null_resource" "az_login" {
+    resource "null_resource" "get_kubeconfig" {
       provisioner "local-exec" {
-      command = "az login --service-principal --username ${var.terraform_azure_service_principal_client_id} --password ${var.terraform_azure_service_principal_client_secret} --tenant ${var.terraform_azure_service_principal_tenant_id}"
+      command = "sudo echo \"$(terraform output kube_config)\" > /home/azureuser/.kube/config"
       }
       depends_on = ["azurerm_kubernetes_cluster.k8s"]
     }
-    resource "null_resource" "get_config" {
+
+    resource "null_resource" "export_config" {
       provisioner "local-exec" {
-        command = "az aks get-credentials --resource-group=${var.terraform_azure_resource_group} --name=${var.terrafform_aks_name} -f kubeconfig"
+        command = "export KUBECONFIG=/home/azureuser/.kube/config"
       }
       
-          depends_on = ["null_resource.az_login"]
+          depends_on = ["null_resource.get_kubeconfig"]
     }
     resource "null_resource" "create_tiller_serviceaccount" {
       provisioner "local-exec" {
         command = "kubectl create serviceaccount --namespace kube-system tiller"
       }
-      depends_on = ["null_resource.get_config"]
+      depends_on = ["null_resource.export_config"]
     }
     resource "null_resource" "create_tiller_clusterrolebinding" {
       provisioner "local-exec" {
