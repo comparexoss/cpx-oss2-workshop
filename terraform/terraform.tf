@@ -51,6 +51,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       
           depends_on = ["null_resource.get_kubeconfig"]
     }
+    resource "null_resource" "test2" {
+      provisioner "local-exec" {
+        command = "kubectl get pods --all-namespaces"
+      }
+      depends_on = ["null_resource.export_config"]
+    }
     resource "null_resource" "create_tiller_serviceaccount" {
       provisioner "local-exec" {
         command = "kubectl create serviceaccount --namespace kube-system tiller"
