@@ -133,7 +133,7 @@ pipeline {
     }
      stage('Helm Configure'){
           steps{
-            sh '/scripts/helmconfigure.sh'
+            sh 'bash ./scripts/helmconfigure.sh'
           }
     }
     stage('Helm PreSteps'){
