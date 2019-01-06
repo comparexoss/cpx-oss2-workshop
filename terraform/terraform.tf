@@ -49,3 +49,27 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       }
       depends_on = ["null_resource.az_login"]
     }
+    resource "null_resource" "create_tiller_serviceaccount" {
+      provisioner "local-exec" {
+        command = "sudo kubectl create serviceaccount --namespace kube-system tiller"
+      }
+      depends_on = ["null_resource.get_config"]
+    }
+    resource "null_resource" "create_tiller_clusterrolebinding " {
+      provisioner "local-exec" {
+        command = "sudo kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller"
+      }
+      depends_on = ["null_resource.create_tiller_serviceaccount"]
+    }
+    resource "null_resource" "patch_deploy" {
+      provisioner "local-exec" {
+        command = "sudo kubectl patch deploy --namespace kube-system tiller-deploy -p '{\"spec\":{\"template\":{\"spec\":{\"serviceAccount\":\"tiller\"}}}}'"
+      }
+      depends_on = ["null_resource.create_tiller_serviceaccount"]
+    }
+    resource "null_resource" "helm_init" {
+      provisioner "local-exec" {
+        command = "sudo /usr/local/bin/helm init --service-account tiller"
+      }
+      depends_on = ["null_resource.patch_deploy"]
+    }
