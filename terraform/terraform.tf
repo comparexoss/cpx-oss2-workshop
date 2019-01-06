@@ -78,7 +78,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
     resource "null_resource" "helm_init" {
       provisioner "local-exec" {
-        command = "sudo /usr/local/bin/helm init --service-account tiller"
+        command = "sudo /usr/local/bin/helm init --service-account tiller --kubeconfig ~/.kube/config"
       }
       depends_on = ["null_resource.patch_deploy"]
     }
