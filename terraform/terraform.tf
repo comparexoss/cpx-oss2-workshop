@@ -71,7 +71,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
     resource "null_resource" "patch_deploy" {
       provisioner "local-exec" {
-        command = "kubectl patch deploy --namespace kube-system tiller-deploy -p '{\"spec\":{\"template\":{\"spec\":{\"serviceAccount\":\"tiller\"}}}}'"
+        #command = "kubectl patch deploy --namespace kube-system tiller-deploy -p '{\"spec\":{\"template\":{\"spec\":{\"serviceAccount\":\"tiller\"}}}}'"
       }
       depends_on = ["null_resource.create_tiller_serviceaccount"]
     }
