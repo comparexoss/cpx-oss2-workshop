@@ -133,7 +133,7 @@ pipeline {
     }
     stage('Helm PreSteps'){
           steps{
-            sh 'sudo /usr/local/bin/helm init --client-only -kubeconfig ~/.kube/config' 
+            sh 'sudo /usr/local/bin/helm init --client-only --kubeconfig ~/.kube/config' 
           }
     }
     stage('Deploy using Helm') {
