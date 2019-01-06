@@ -55,7 +55,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       }
       depends_on = ["null_resource.get_config"]
     }
-    resource "null_resource" "create_tiller_clusterrolebinding " {
+    resource "null_resource" "create_tiller_clusterrolebinding" {
       provisioner "local-exec" {
         command = "sudo kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller"
       }
