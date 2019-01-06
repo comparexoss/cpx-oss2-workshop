@@ -35,7 +35,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
    tags {
         Environment = "Development"
     }
-  
+}
+
     resource "null_resource" "az_login" {
       provisioner "local-exec" {
       command = "az login --service-principal --username ${var.terraform_azure_service_principal_client_id} --password ${var.terraform_azure_service_principal_client_secret} --tenant ${var.terraform_azure_service_principal_tenant_id}"
@@ -55,7 +56,3 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       }
       depends_on = ["null_resource.get_config"]
     }
-
-
-
-}
