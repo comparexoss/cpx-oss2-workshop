@@ -49,10 +49,3 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       }
       depends_on = ["null_resource.az_login"]
     }
-
-    resource "null_resource" "browse_aks" {
-      provisioner "local-exec" {
-        command = "az aks browse --resource-group=${var.terraform_azure_resource_group} --name ${var.terrafform_aks_name}"
-      }
-      depends_on = ["null_resource.get_config"]
-    }
