@@ -36,7 +36,7 @@ pipeline {
              dir('terraform')
              {
               script {
-                    currentBuild.displayName = "${env.BUILD_NUMBER}"
+                    currentBuild.displayName = "${env.BUILD_TAG}"
                 }
               sh 'terraform init -input=false'
               sh "terraform plan -input=false -out tfplan -var 'version=${env.BUILD_NUMBER}'"
@@ -135,7 +135,7 @@ pipeline {
           steps{
             sh 'sudo /usr/local/bin/kubectl create serviceaccount --namespace kube-system tiller' 
             sh 'sudo /usr/local/bin/kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller'
-            sh "sudo /usr/local/bin/kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'  "
+            //sh "sudo /usr/local/bin/kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'  "
             sh 'sudo /usr/local/bin/helm init --service-account tiller'
           }
     }
