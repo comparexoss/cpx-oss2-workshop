@@ -36,4 +36,26 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         Environment = "Development"
     }
   
+    resource "null_resource" "az_login" {
+      provisioner "local-exec" {
+      command = "az login --service-principal --username ${var.terraform_azure_service_principal_client_id} --password ${var.terraform_azure_service_principal_client_secret} --tenant ${var.terraform_azure_service_principal_tenant_id}"
+      }
+      depends_on = ["azurerm_kubernetes_cluster.k8s"]
+    }
+    resource "null_resource" "get_config" {
+      provisioner "local-exec" {
+        command = "az aks get-credentials --resource-group=${var.terraform_azure_resource_group} --name=${var.terrafform_aks_name}"
+      }
+      depends_on = ["null_resource.az_login"]
+    }
+
+    resource "null_resource" "browse_aks" {
+      provisioner "local-exec" {
+        command = "az aks browse --resource-group=${var.terraform_azure_resource_group} --name devopshkkaks=${var.terrafform_aks_name}"
+      }
+      depends_on = ["null_resource.get_config"]
+    }
+
+
+
 }
