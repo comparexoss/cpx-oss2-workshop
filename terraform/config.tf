@@ -56,6 +56,18 @@ variable "terraform_azure_service_principal_client_secret" {
   default     = ""
 }
 
+variable "terraform_azure_service_principal_tenant_id" {
+  type        = "string"
+  description = "azure tenant id"
+  default     = ""
+}
+
+variable "terraform_azure_service_principal_subscription_id" {
+  type        = "string"
+  description = "azure subscription id"
+  default     = ""
+}
+
 variable "terraform_aks_kubernetes_version" {
   type        = "string"
   description = "Kubernetes Version"
