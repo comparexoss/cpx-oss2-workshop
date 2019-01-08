@@ -36,12 +36,17 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         Environment = "Development"
     }
 }
-
+    resource "null_resource" "create_folder" {
+      provisioner "local-exec" {
+        command = "mkdir ~/.kube/config"
+      }
+      depends_on = ["azurerm_kubernetes_cluster.k8s"]
+    }
     resource "null_resource" "get_kubeconfig" {
       provisioner "local-exec" {
       command = "sudo echo \"$(terraform output kube_config)\" > ~/.kube/config"
       }
-      depends_on = ["azurerm_kubernetes_cluster.k8s"]
+      depends_on = ["null_resource.create_folder"]
     }
 
     resource "null_resource" "export_config" {
@@ -51,12 +56,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       
           depends_on = ["null_resource.get_kubeconfig"]
     }
-    resource "null_resource" "test2" {
-      provisioner "local-exec" {
-        command = "kubectl get pods --all-namespaces"
-      }
-      depends_on = ["null_resource.export_config"]
-    }
+
     resource "null_resource" "create_tiller_serviceaccount" {
       provisioner "local-exec" {
         command = "kubectl create serviceaccount --namespace kube-system tiller"
