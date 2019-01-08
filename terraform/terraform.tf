@@ -36,22 +36,17 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         Environment = "Development"
     }
 }
-    resource "null_resource" "create_folder" {
-      provisioner "local-exec" {
-        command = "mkdir -p ~/.kube && touch ~/.kube/config"
-      }
-      depends_on = ["azurerm_kubernetes_cluster.k8s"]
-    }
+
     resource "null_resource" "get_kubeconfig" {
       provisioner "local-exec" {
       command = "sudo echo \"$(terraform output kube_config)\" > ~/.kube/config"
       }
-      depends_on = ["null_resource.create_folder"]
+      depends_on = ["azurerm_kubernetes_cluster.k8s"]
     }
 
     resource "null_resource" "export_config" {
       provisioner "local-exec" {
-        command = "export KUBECONFIG=~/.kube/config"
+        command = "export KUBECONFIG=/var/lib/jenkins/.kube/config"
       }
       
           depends_on = ["null_resource.get_kubeconfig"]
@@ -78,7 +73,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
     resource "null_resource" "helm_init" {
       provisioner "local-exec" {
-        command = "sudo /usr/local/bin/helm init --service-account tiller --kubeconfig ~/.kube/config"
+        command = "sudo /usr/local/bin/helm init --service-account tiller --kubeconfig /var/lib/jenkins/.kube/config"
       }
       depends_on = ["null_resource.patch_deploy"]
     }
