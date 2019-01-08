@@ -61,17 +61,8 @@
     command: yum install -y kubectl
     become: true
   - name: Create KubeConfig directory
-    file:
-      path: ~/.kube
-      state: directory
-      mode: 0755
-      debugger: always
-  - name: Create Config file
-    file:
-      path: ~/.kube/config
-      state: touch
-      mode: 0755
-      debugger: always      
+    command: mkdir -p ~/.kube && touch ~/.kube/config
+    become: true
   - name: Add AzCli Repo
     shell: |
       rpm --import https://packages.microsoft.com/keys/microsoft.asc
