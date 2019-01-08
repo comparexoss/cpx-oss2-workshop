@@ -60,8 +60,9 @@
   - name: Create KubeConfig directory
     file:
       path: /.kube/config
-      state: present
+      state: directory
       mode: "u=rw,g=rwx,o=rwx"
+      recurse: yes
   - name: Add AzCli Repo
     shell: |
       rpm --import https://packages.microsoft.com/keys/microsoft.asc
