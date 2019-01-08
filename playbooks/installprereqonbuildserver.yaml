@@ -90,14 +90,14 @@
       remote_src: True
   - name: Permission to Helm directory
     file: 
-      path: /usr/local/bin/helm
+      path: /usr/local/bin
       state: directory
       mode: 775
       recurse: yes      
   - name: Install Helm
     unarchive:
       src: https://storage.googleapis.com/kubernetes-helm/helm-v2.12.1-linux-amd64.tar.gz
-      dest: /usr/local/bin/helm
+      dest: /usr/local/bin
       remote_src: True
       extra_opts: [--strip-components=1]
   - name: Add Helm to Path 
