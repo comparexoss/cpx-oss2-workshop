@@ -62,11 +62,16 @@
     become: true
   - name: Create KubeConfig directory
     file:
-      path: "~/.kube"
+      path: ~/.kube
       state: directory
-      owner: jenkins
-      group: root
-      mode: 0775
+      mode: 0755
+      debugger: always
+  - name: Create Config file
+    file:
+      path: ~/.kube/config
+      state: touch
+      mode: 0755
+      debugger: always      
   - name: Add AzCli Repo
     shell: |
       rpm --import https://packages.microsoft.com/keys/microsoft.asc
