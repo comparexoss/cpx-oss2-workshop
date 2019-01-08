@@ -61,7 +61,15 @@
     command: yum install -y kubectl
     become: true
   - name: Create KubeConfig directory
-    command: mkdir -p ~/.kube && touch ~/.kube/config
+    file: 
+      path: /var/lib/jenkins/.kube
+      state: directory
+      mode: 775
+  - name: Create Config file
+    file: 
+      path: /var/lib/jenkins/.kube/config
+      state: touch
+      mode: 775      
     become: true
   - name: Add AzCli Repo
     shell: |
