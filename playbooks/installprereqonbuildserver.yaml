@@ -62,7 +62,7 @@
     become: true
   - name: Create KubeConfig directory
     file:
-      path: /.kube/config
+      path: ~/.kube/config
       state: directory
       mode: "u=rw,g=rwx,o=rwx"
       recurse: yes
