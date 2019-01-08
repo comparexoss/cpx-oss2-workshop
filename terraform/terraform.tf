@@ -38,7 +38,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 }
     resource "null_resource" "create_folder" {
       provisioner "local-exec" {
-        command = "mkdir -p ~/.kube/config"
+        command = "mkdir -p ~/.kube"
       }
       depends_on = ["azurerm_kubernetes_cluster.k8s"]
     }
