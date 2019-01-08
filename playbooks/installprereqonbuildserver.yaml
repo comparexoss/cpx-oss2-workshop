@@ -4,6 +4,9 @@
     PYTHONPATH: "/home/path/.local/lib/python2.7/site-packages"
   become: true
   tasks:
+  - name: get pwd
+    shell: pwd
+    register: result
   - name: Install yum utils
     yum:
       name: yum-utils
