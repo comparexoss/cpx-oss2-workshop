@@ -57,6 +57,11 @@
   - name: Install Kubectl
     command: yum install -y kubectl
     become: true
+  - name: Create KubeConfig directory
+    file:
+      path: /.kube/config
+      state: present
+      mode: "u=rw,g=rwx,o=rwx"
   - name: Add AzCli Repo
     shell: |
       rpm --import https://packages.microsoft.com/keys/microsoft.asc
