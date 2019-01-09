@@ -2,7 +2,7 @@ terraform_azure_resource_group = "mstrdevopsaksrg"
 
 terraform_azure_region = "West Europe"
 
-terrafform_aks_name = "devopshkkaks"
+terrafform_aks_name = "devopshkkaks2"
 
 terraform_aks_agent_vm_count = 2
 
