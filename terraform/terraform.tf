@@ -39,7 +39,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
     resource "null_resource" "get_kubeconfig" {
       provisioner "local-exec" {
-      command = "sudo echo \"$(terraform output kube_config)\" > ~/.kube/config"
+      command = "sudo echo \"$(terraform output kube_config)\" > /var/lib/jenkins/.kube/config"
       }
       depends_on = ["azurerm_kubernetes_cluster.k8s"]
     }
