@@ -70,9 +70,9 @@ pipeline {
             steps {
                 dir('terraform')
                 {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                        sh "terraform apply tfplan -var 'terraform_azure_service_principal_client_id=$USERNAME' -var 'terraform_azure_service_principal_client_secret=$PASSWORD'"
-                    }
+                    
+                        sh "terraform apply tfplan"
+                    
                 }
             }
         }
