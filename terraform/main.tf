@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "1.5.0"
+  version = "~>1.5"
   subscription_id = "${var.terraform_azure_service_principal_subscription_id}"
   client_id       = "${var.terraform_azure_service_principal_client_id}"
   client_secret   = "${var.terraform_azure_service_principal_client_secret}"
