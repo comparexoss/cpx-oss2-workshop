@@ -39,9 +39,7 @@ pipeline {
                     currentBuild.displayName = "${env.BUILD_TAG}"
                 }
               sh 'terraform init'
-              withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                 sh "terraform plan -out tfplan -var 'version=${env.BUILD_NUMBER}' -var 'terraform_azure_service_principal_client_id=$USERNAME' -var 'terraform_azure_service_principal_client_secret=$PASSWORD'"
-              }
+              sh "terraform plan -input=false -out tfplan -var 'version=${env.BUILD_NUMBER}'"
               sh 'terraform show -no-color tfplan > tfplan.txt'
              }
         }
