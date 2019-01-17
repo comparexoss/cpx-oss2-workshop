@@ -12,9 +12,9 @@ terraform_azure_admin_name = "azureuser"
 
 terraform_azure_ssh_key = "/var/tmp/.ssh/id_rsa.pub"
 
-terraform_azure_service_principal_client_id = "07e3e541-57d3-4591-b7eb-705da6838259"	
+terraform_azure_service_principal_client_id = ""	
 
-terraform_azure_service_principal_client_secret = "5d1c2325-5493-425f-aee5-e37fb2ffffa6"
+terraform_azure_service_principal_client_secret = ""
 
 terraform_azure_service_principal_tenant_id = "bd200d3d-aa96-41ae-8c56-0bd57c973985"
 
